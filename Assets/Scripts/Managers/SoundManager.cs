@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
 
 public enum SoundType
 {
@@ -15,17 +11,20 @@ public enum SoundType
 public class SoundManager : MonoBehaviour
 {
     public static bool isSoundEnable = true;
-    [SerializeField] private AudioClip[] soundList;
+    [SerializeField] private AudioClip[] _soundList;
     private static SoundManager instance;
-    private AudioSource audioSource;
+    private const string SoundEnabledKey = "SoundEnabled";
+    private AudioSource _audioSource;
+    private bool _isSoundCurrentlyEnabled;
     void Awake()
     {
         instance = this;
         DontDestroyOnLoad(transform.root.gameObject);
+        GetSoundSettings();
     }
     void Start()
     {
-        audioSource = GetComponent<AudioSource>();
+        _audioSource = GetComponent<AudioSource>();
     }
 
     public static void PlaySound(SoundType sound, float volume = 1)
@@ -34,24 +33,25 @@ public class SoundManager : MonoBehaviour
         {
             return;
         }
-        if (sound == SoundType.HIT)
+        switch (sound)
         {
-            instance.audioSource.pitch = 4;
+            case SoundType.HIT:
+                instance._audioSource.pitch = 4;
+                break;
+            case SoundType.BUTTONHOVER:
+                instance._audioSource.volume = 0.5f;
+                instance._audioSource.pitch = 3;
+                break;
+            default:
+                instance._audioSource.pitch = 1;
+                break;
         }
-        else if (sound == SoundType.BUTTONHOVER)
-        {
-            instance.audioSource.volume = 0.5f;
-            instance.audioSource.pitch = 3;
-        }
-        else
-        {
-            instance.audioSource.pitch = 1;
-        }
-        instance.audioSource.PlayOneShot(instance.soundList[(int)sound], volume);
+        instance._audioSource.PlayOneShot(instance._soundList[(int)sound], volume);
     }
     public static void ToggleSound()
     {
         isSoundEnable = !isSoundEnable;
+        instance.SetSoundSettings();
     }
     public void ButtonClickSound()
     {
@@ -60,5 +60,16 @@ public class SoundManager : MonoBehaviour
     public void ButtonHover()
     {
         PlaySound(SoundType.BUTTONHOVER);
+    }
+    // Метод для збереження налаштувань музики та конвертації Bool в Int,тому що PlayerPrefs зберігає тільки Int,Float,String
+    private void SetSoundSettings()
+    {
+        PlayerPrefs.SetInt(SoundEnabledKey, isSoundEnable ? 1 : 0); // якщо змінна _isSoundEnabled == true то присвоюємо значення ключа SoundEnabledKey 1,якщо _isSoundEnabled == false присвоюємо значення ключа 0.
+        PlayerPrefs.Save();
+    }
+    // Метод для отримання налаштувань користувача та конвертація int ключа назад в bool
+    private void GetSoundSettings()
+    {
+        isSoundEnable = PlayerPrefs.GetInt(SoundEnabledKey, 1) == 1; // конвертуємо Int ключ в Bool назад і присвоюємо змінній _isSoundEnabled булеве значення,якщо ключ SoundEnabledKey 1 відбувається наступна перевірка 1 == 1 повертає true,якщо ключ 0,а 0 == 1 поверне false
     }
 }

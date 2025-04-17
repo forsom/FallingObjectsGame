@@ -85,7 +85,7 @@ public class GameController : MonoBehaviour
     }
     public void EnableSound()
     {
-        SoundManager.isSoundEnable = !SoundManager.isSoundEnable;
+        SoundManager.ToggleSound();
         UpdateButtonSprite(soundButton, SoundManager.isSoundEnable);
     }
     public void Score()

@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class FallingObject : MonoBehaviour
+public class BombCollision : MonoBehaviour
 {
     void OnCollisionEnter2D(Collision2D collision)
     {
