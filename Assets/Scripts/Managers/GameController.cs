@@ -1,11 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using TMPro;
-using Unity.Mathematics;
-using Unity.VisualScripting.ReorderableList;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -17,12 +10,16 @@ public class GameController : MonoBehaviour
     [SerializeField] private Image ScrImg;
     [SerializeField] private TMP_Text TimerText;
     [SerializeField] private TMP_Text ScrTxt;
+    [SerializeField] private TMP_Text BestScrTxt;
     [SerializeField] private GameObject settingsMenu;
     [SerializeField] private Button musicButton;
     [SerializeField] private Button soundButton;
 
     [SerializeField] private Sprite onButton;
     [SerializeField] private Sprite offButton;
+    private float _bestScore;
+    private float _currentScore;
+    private const string BestScoreKey = "UserBestScore";
 
     void Awake()
     {
@@ -37,10 +34,12 @@ public class GameController : MonoBehaviour
     }
     void ActivateGameOverScreen()
     {
+        BestScore();
         SoundManager.PlaySound(SoundType.GAMEOVER);
         GameOverCanvas.gameObject.SetActive(true);
         ScrImg.gameObject.SetActive(false);
-        TimerText.text = "Record: " + Math.Round(Time.timeSinceLevelLoad);
+        TimerText.text = "Score: " + Mathf.Round(Time.timeSinceLevelLoad);
+        BestScrTxt.text = "Best score: " + Mathf.Round(_bestScore);
         playerMovement.PlayerDied -= ActivateGameOverScreen;
     }
     void PauseMenu()
@@ -93,8 +92,20 @@ public class GameController : MonoBehaviour
     {
         if (ScrTxt != null)
         {
-            ScrTxt.text = ": " + Math.Round(Time.timeSinceLevelLoad);
+            ScrTxt.text = ": " + Mathf.Round(Time.timeSinceLevelLoad);
         }
+    }
+    private void BestScore()
+    {
+        _currentScore = Mathf.Round(Time.timeSinceLevelLoad);
+        _bestScore = PlayerPrefs.GetFloat(BestScoreKey, 0);
+        if (_currentScore > _bestScore)
+        {
+            _bestScore = _currentScore;
+            PlayerPrefs.SetFloat(BestScoreKey,_currentScore);
+            PlayerPrefs.Save();
+        }
+
     }
     private void UpdateButtonSprite(Button button, bool isEnabled)
     {
