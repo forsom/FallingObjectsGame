@@ -10,10 +10,11 @@ public class BombCollision : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Player" || collision.gameObject.tag == "Background")
+        if (collision.gameObject.CompareTag("Background"))
         {
             _cameraAnim.SetTrigger("shake");
-            Destroy(this.gameObject);
+            SoundManager.PlaySound(SoundType.BOMBEXPLOSION);
         }
+        Destroy(this.gameObject);
     }
 }

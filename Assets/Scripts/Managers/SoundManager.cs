@@ -6,6 +6,7 @@ public enum SoundType
     BUTTONCLICK,
     BUTTONHOVER,
     GAMEOVER,
+    BOMBEXPLOSION
 }
 [RequireComponent(typeof(AudioSource))]
 public class SoundManager : MonoBehaviour
@@ -41,6 +42,10 @@ public class SoundManager : MonoBehaviour
             case SoundType.BUTTONHOVER:
                 instance._audioSource.volume = 0.5f;
                 instance._audioSource.pitch = 3;
+                break;
+            case SoundType.BOMBEXPLOSION:
+                instance._audioSource.volume = 0.4f;
+                instance._audioSource.pitch = 1.1f;
                 break;
             default:
                 instance._audioSource.pitch = 1;

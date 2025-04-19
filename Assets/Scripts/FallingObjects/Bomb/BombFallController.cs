@@ -9,31 +9,31 @@ public class BobmFallControler : MonoBehaviour
     [SerializeField] private float _wait = 0.8f;
     [SerializeField] private float _waitDecrease = 0.05f;
     [SerializeField] private float _increaseDifficultyInterval = 5f;
-    public GameObject fallingObject;
-    private List<GameObject> _spawnedObjects = new List<GameObject>();
+    public GameObject bombObject;
+    private List<GameObject> _spawnedBombsList = new List<GameObject>();
     private float _timeSinceLastIncreasedDiffuculty;
     private bool _isSpawning = true;
 
 
     private void Start()
     {
-        StartCoroutine(Spawner());
+        StartCoroutine(BombSpawner());
     }
     void Update()
     {
         IncreaseDifficulty();
     }
 
-    private void RandomDirectionSpawn()
+    public void RandomDirectionSpawn()
     {
-        GameObject newobject = Instantiate(fallingObject, new Vector3(Random.Range(_minX, _maxX), 15, 0), Quaternion.identity);
-        _spawnedObjects.Add(newobject);
+        GameObject newobject = Instantiate(bombObject, new Vector3(Random.Range(_minX, _maxX), 15, 0), Quaternion.identity);
+        _spawnedBombsList.Add(newobject);
     }
-    private System.Collections.IEnumerator Spawner()
+    private System.Collections.IEnumerator BombSpawner()
     {
-        if (playerMovement != null && fallingObject != null)
+        if (playerMovement != null && bombObject != null)
         {
-            playerMovement.PlayerDied += StopObjectsFall;
+            playerMovement.PlayerDied += StopBombsFall;
             while (_isSpawning)
             {
                 RandomDirectionSpawn();
@@ -41,26 +41,26 @@ public class BobmFallControler : MonoBehaviour
             }
         }
     }
-    private void StopObjectsFall()
+    private void StopBombsFall()
     {
         if (playerMovement != null)
         {
             _isSpawning = false;
-            playerMovement.PlayerDied -= StopObjectsFall;
-            HideObjects();
+            playerMovement.PlayerDied -= StopBombsFall;
+            HideBombs();
         }
     }
 
-    private void HideObjects()
+    private void HideBombs()
     {
-        foreach (GameObject obj in _spawnedObjects)
+        foreach (GameObject obj in _spawnedBombsList)
         {
             if (obj != null)
             {
                 obj.SetActive(false);
             }
         }
-        _spawnedObjects.Clear();
+        _spawnedBombsList.Clear();
     }
     private void IncreaseDifficulty()
     {

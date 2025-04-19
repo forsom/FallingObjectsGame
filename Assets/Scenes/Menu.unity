@@ -266,7 +266,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2382566168784092669, guid: f6af93b24bdd8e54a9934a547db57daa, type: 3}
       propertyPath: _soundList.Array.size
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2382566168784092669, guid: f6af93b24bdd8e54a9934a547db57daa, type: 3}
       propertyPath: _soundList.Array.data[0]
@@ -284,6 +284,10 @@ PrefabInstance:
       propertyPath: _soundList.Array.data[3]
       value: 
       objectReference: {fileID: 8300000, guid: 18b47d36a7a79f648a393130e7b46188, type: 3}
+    - target: {fileID: 2382566168784092669, guid: f6af93b24bdd8e54a9934a547db57daa, type: 3}
+      propertyPath: _soundList.Array.data[4]
+      value: 
+      objectReference: {fileID: 8300000, guid: ecb4b75d687bad04f9cc0e4750583a2c, type: 3}
     - target: {fileID: 5642707672543479036, guid: f6af93b24bdd8e54a9934a547db57daa, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

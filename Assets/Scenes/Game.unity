@@ -792,7 +792,9 @@ GameObject:
   - component: {fileID: 519420032}
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
+  - component: {fileID: 519420034}
   - component: {fileID: 519420033}
+  - component: {fileID: 519420035}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -892,7 +894,47 @@ MonoBehaviour:
   _wait: 0.8
   _waitDecrease: 0.05
   _increaseDifficultyInterval: 5
-  fallingObject: {fileID: 6316758610530778232, guid: 9010d1d4c39b22c41940b17425757708, type: 3}
+  bombObject: {fileID: 6316758610530778232, guid: 9010d1d4c39b22c41940b17425757708, type: 3}
+--- !u!95 &519420034
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 47db3716942aaf54b86e71f393114617, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &519420035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48a4a3c964a689742a80c491f6a118e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerMovement: {fileID: 2097547337}
+  _minX: -20
+  _maxX: 20
+  _minWait: 5
+  _maxWait: 10
+  initialDelay: 10
+  coinObject: {fileID: 1071689768524494611, guid: 7e1f556d3b652a64f932524a9843b8bc, type: 3}
 --- !u!1 &568097801
 GameObject:
   m_ObjectHideFlags: 0
@@ -3225,7 +3267,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2382566168784092669, guid: f6af93b24bdd8e54a9934a547db57daa, type: 3}
       propertyPath: _soundList.Array.size
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2382566168784092669, guid: f6af93b24bdd8e54a9934a547db57daa, type: 3}
       propertyPath: _soundList.Array.data[0]
@@ -3243,6 +3285,10 @@ PrefabInstance:
       propertyPath: _soundList.Array.data[3]
       value: 
       objectReference: {fileID: 8300000, guid: 18b47d36a7a79f648a393130e7b46188, type: 3}
+    - target: {fileID: 2382566168784092669, guid: f6af93b24bdd8e54a9934a547db57daa, type: 3}
+      propertyPath: _soundList.Array.data[4]
+      value: 
+      objectReference: {fileID: 8300000, guid: ecb4b75d687bad04f9cc0e4750583a2c, type: 3}
     - target: {fileID: 5642707672543479036, guid: f6af93b24bdd8e54a9934a547db57daa, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
