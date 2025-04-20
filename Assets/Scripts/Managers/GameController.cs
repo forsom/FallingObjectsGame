@@ -8,9 +8,11 @@ public class GameController : MonoBehaviour
     [SerializeField] PlayerMovement playerMovement;
     [SerializeField] private Canvas GameOverCanvas;
     [SerializeField] private Image ScrImg;
+    [SerializeField] private Image CoinsCount;
     [SerializeField] private TMP_Text TimerText;
     [SerializeField] private TMP_Text ScrTxt;
     [SerializeField] private TMP_Text BestScrTxt;
+    [SerializeField] private TMP_Text CoinsTxt;
     [SerializeField] private GameObject settingsMenu;
     [SerializeField] private Button musicButton;
     [SerializeField] private Button soundButton;
@@ -30,7 +32,7 @@ public class GameController : MonoBehaviour
     void Update()
     {
         PauseMenu();
-        Score();
+        ScoreAndCoins();
     }
     void ActivateGameOverScreen()
     {
@@ -38,6 +40,7 @@ public class GameController : MonoBehaviour
         SoundManager.PlaySound(SoundType.GAMEOVER);
         GameOverCanvas.gameObject.SetActive(true);
         ScrImg.gameObject.SetActive(false);
+        CoinsCount.gameObject.SetActive(false);
         TimerText.text = "Score: " + Mathf.Round(Time.timeSinceLevelLoad);
         BestScrTxt.text = "Best score: " + Mathf.Round(_bestScore);
         playerMovement.PlayerDied -= ActivateGameOverScreen;
@@ -88,11 +91,12 @@ public class GameController : MonoBehaviour
         SoundManager.ToggleSound();
         UpdateButtonSprite(soundButton, SoundManager.isSoundEnable);
     }
-    public void Score()
+    public void ScoreAndCoins()
     {
-        if (ScrTxt != null)
+        if (ScrTxt != null && CoinsTxt != null)
         {
             ScrTxt.text = ": " + Mathf.Round(Time.timeSinceLevelLoad);
+            CoinsTxt.text = ": " + CoinManager.instance.coinsCount;
         }
     }
     private void BestScore()

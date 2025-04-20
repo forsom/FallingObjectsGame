@@ -6,8 +6,7 @@ public class CoinCollision : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            // Add CoinPickUp Sound
-            // Add Coin Counter 
+            CoinManager.instance.AddCoin();
         }
         Destroy(this.gameObject);
     }
