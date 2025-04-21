@@ -9,14 +9,25 @@ public class PlayerMovement : MonoBehaviour
     public Rigidbody2D rb;
     public Animator anim;
     public event Action PlayerDied;
+    public static PlayerMovement instance;
 
     [SerializeField] private float _moveSpeed = 10f;
     private float _horizontalMovement;
-    private int _maxHealth = 3;
-    [SerializeField] private GameObject heart1;
     [SerializeField] private GameObject heart2;
     [SerializeField] private GameObject heart3;
     [SerializeField] private GameObject healthBar;
+    private int _maxHealth = 3;
+    void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -49,7 +60,7 @@ public class PlayerMovement : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Object"))
+        if (collision.gameObject.CompareTag("Bomb"))
         {
             _maxHealth--;
             SoundManager.PlaySound(SoundType.HIT);
@@ -66,20 +77,28 @@ public class PlayerMovement : MonoBehaviour
                 PlayerDied.Invoke();
             }
         }
+        if (collision.gameObject.CompareTag("Heart"))
+        {
+            HeartsUpdate();
+        }
     }
+    public void SetHealth(int newHealth)
+    {
+        _maxHealth = Mathf.Clamp(newHealth, 0, 3);
+        HeartsUpdate();
+
+    }
+
+    public int GetHealth()
+    {
+        return _maxHealth;
+    }
+
     private void HeartsUpdate()
     {
-        if (_maxHealth == 2)
-        {
-            heart3.SetActive(false); // Вимикаємо heart3, залишаємо 2 серця
-        }
-        else if (_maxHealth == 1)
-        {
-            heart1.SetActive(false); // Вимикаємо heart2, залишаємо 1 серце
-        }
-        else if (_maxHealth == 0)
-        {
-            healthBar.SetActive(false); // Вимикаємо HealthBar закінчились серця
-        }
+        heart2.SetActive(_maxHealth >= 2);
+        heart3.SetActive(_maxHealth >= 3);
+        healthBar.SetActive(_maxHealth > 0);
     }
 }
+

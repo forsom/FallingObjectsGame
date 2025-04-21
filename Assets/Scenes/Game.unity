@@ -975,6 +975,7 @@ GameObject:
   - component: {fileID: 519420034}
   - component: {fileID: 519420033}
   - component: {fileID: 519420035}
+  - component: {fileID: 519420036}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1115,6 +1116,25 @@ MonoBehaviour:
   _maxWait: 10
   initialDelay: 10
   coinObject: {fileID: 1071689768524494611, guid: 7e1f556d3b652a64f932524a9843b8bc, type: 3}
+--- !u!114 &519420036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f25c1c9530c0aad4d87c5f76224773d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerMovement: {fileID: 2097547337}
+  _minX: -20
+  _maxX: 20
+  _minWait: 1
+  _maxWait: 2
+  initialDelay: 3
+  heartObject: {fileID: 8708295884500250874, guid: ae29034cb3c0e084a98482d847f5a29c, type: 3}
 --- !u!1 &568097801
 GameObject:
   m_ObjectHideFlags: 0
@@ -1367,8 +1387,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1412042318}
   - {fileID: 1256871717}
+  - {fileID: 1412042318}
   - {fileID: 579413872}
   m_Father: {fileID: 1648623201}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1845,7 +1865,7 @@ GameObject:
   - component: {fileID: 1256871719}
   - component: {fileID: 1256871718}
   m_Layer: 5
-  m_Name: Heart2
+  m_Name: Heart1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2007,7 +2027,7 @@ GameObject:
   - component: {fileID: 1412042320}
   - component: {fileID: 1412042319}
   m_Layer: 5
-  m_Name: Heart1
+  m_Name: Heart2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3286,8 +3306,7 @@ MonoBehaviour:
   rb: {fileID: 2097547339}
   anim: {fileID: 2097547341}
   _moveSpeed: 10
-  heart1: {fileID: 1412042317}
-  heart2: {fileID: 1256871716}
+  heart2: {fileID: 1412042317}
   heart3: {fileID: 579413871}
   healthBar: {fileID: 1648623200}
 --- !u!70 &2097547338

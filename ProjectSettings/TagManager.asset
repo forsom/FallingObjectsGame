@@ -4,8 +4,10 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Object
   - Background
+  - Coin
+  - Heart
+  - Bomb
   layers:
   - Default
   - TransparentFX
