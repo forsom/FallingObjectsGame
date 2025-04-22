@@ -8,6 +8,7 @@ public class HeartCollision : MonoBehaviour
         {
             int currentHealth = PlayerMovement.instance.GetHealth();
             PlayerMovement.instance.SetHealth(currentHealth + 1);
+            SoundManager.PlaySound(SoundType.HEARTPICKUP);
         }
         Destroy(this.gameObject);
     }
