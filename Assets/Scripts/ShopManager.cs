@@ -3,25 +3,50 @@ using TMPro;
 
 public class ShopManager : MonoBehaviour
 {
-    public GameObject[] characterPrefabs;
-    [SerializeField] public int selectedCharacterIndex = 0; // зберігати цю змінну через player prefs 
+    public GameObject[] characterPreview;
+    public int selectedCharacterIndex; 
     [SerializeField] private TMP_Text Money;
     public static ShopManager instance;
-    void Start()
+    private void Start()
     {
-        // CharacterSelection();
+        CharacterSelection();
     }
-    void Update()
+    private void Update()
     {
         Money.text = "Coins: " + PlayerPrefs.GetInt("UserCoins", 0);
     }
-    // цей метод добавити на іншу сцену де будем змінювати префаб за станом індексу playerprefs get
-    // private void CharacterSelection()
-    // {
-    //     foreach (GameObject character in characterPrefabs)
-    //     {
-    //         character.SetActive(false);
-    //     }
-    //     characterPrefabs[selectedCharacterIndex].SetActive(true);
-    // }
+    private void CharacterSelection()
+    {
+        selectedCharacterIndex = PlayerPrefs.GetInt("SelecterCharacter", 0);
+        foreach (GameObject character in characterPreview)
+        {
+            character.SetActive(false);
+        }
+        characterPreview[selectedCharacterIndex].SetActive(true);
+    }
+    public void NextButton()
+    {
+        characterPreview[selectedCharacterIndex].SetActive(false);
+        selectedCharacterIndex++;
+        if (selectedCharacterIndex == characterPreview.Length)
+        {
+            selectedCharacterIndex = 0;
+        }
+        characterPreview[selectedCharacterIndex].SetActive(true);
+        PlayerPrefs.SetInt("SelecterCharacter", selectedCharacterIndex);
+        PlayerPrefs.Save();
+    }
+     public void PreviousButton()
+    {
+        characterPreview[selectedCharacterIndex].SetActive(false);
+        selectedCharacterIndex--;
+        if (selectedCharacterIndex == -1)
+        {
+            selectedCharacterIndex = characterPreview.Length - 1;
+        }
+        characterPreview[selectedCharacterIndex].SetActive(true);
+        PlayerPrefs.SetInt("SelecterCharacter", selectedCharacterIndex);
+        PlayerPrefs.Save();
+    }
 }
+

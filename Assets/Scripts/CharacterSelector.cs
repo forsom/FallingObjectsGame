@@ -1,0 +1,22 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class CharacterSelector : MonoBehaviour
+{
+    public GameObject[] characterList;
+    public int selectedCharacterIndex;
+    private void Start()
+    {
+        SelectedCharacter();
+    }
+    private void SelectedCharacter()
+    {
+        selectedCharacterIndex = PlayerPrefs.GetInt("SelecterCharacter", 0);
+        foreach (GameObject character in characterList)
+        {
+            character.SetActive(false);
+        }
+        characterList[selectedCharacterIndex].SetActive(true);
+    }
+}

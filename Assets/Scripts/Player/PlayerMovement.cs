@@ -19,14 +19,9 @@ public class PlayerMovement : MonoBehaviour
     private int _maxHealth = 3;
     void Awake()
     {
-        if (instance == null)
-        {
-            instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+
+        instance = this;
+
     }
     void Start()
     {
@@ -69,9 +64,6 @@ public class PlayerMovement : MonoBehaviour
             {
                 anim.ResetTrigger("damage");
                 anim.SetTrigger("damage");
-            }
-            else if (_maxHealth == 0)
-            {
 
                 Destroy(this.gameObject);
                 PlayerDied.Invoke();
