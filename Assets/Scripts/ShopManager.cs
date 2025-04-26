@@ -4,7 +4,7 @@ using TMPro;
 public class ShopManager : MonoBehaviour
 {
     public GameObject[] characterPreview;
-    public int selectedCharacterIndex; 
+    public int selectedCharacterIndex = 0; 
     [SerializeField] private TMP_Text Money;
     public static ShopManager instance;
     private void Start()
@@ -28,7 +28,7 @@ public class ShopManager : MonoBehaviour
     {
         characterPreview[selectedCharacterIndex].SetActive(false);
         selectedCharacterIndex++;
-        if (selectedCharacterIndex == characterPreview.Length)
+        if (selectedCharacterIndex >= characterPreview.Length)
         {
             selectedCharacterIndex = 0;
         }
@@ -40,7 +40,7 @@ public class ShopManager : MonoBehaviour
     {
         characterPreview[selectedCharacterIndex].SetActive(false);
         selectedCharacterIndex--;
-        if (selectedCharacterIndex == -1)
+        if (selectedCharacterIndex < 0)
         {
             selectedCharacterIndex = characterPreview.Length - 1;
         }
