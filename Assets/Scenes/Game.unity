@@ -1133,7 +1133,7 @@ MonoBehaviour:
   _maxX: 20
   _minWait: 1
   _maxWait: 2
-  initialDelay: 3
+  initialDelay: 2
   heartObject: {fileID: 8708295884500250874, guid: ae29034cb3c0e084a98482d847f5a29c, type: 3}
 --- !u!1 &568097801
 GameObject:
@@ -1516,6 +1516,10 @@ PrefabInstance:
     - target: {fileID: 7275424897332892312, guid: 1328fb85dd699a54eb64ee4373660499, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7275424897332892312, guid: 1328fb85dd699a54eb64ee4373660499, type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2281,16 +2285,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6424274805478107426, guid: bfb5e1cd0fa48f14ab95d4bf92e34f4d, type: 3}
   m_PrefabInstance: {fileID: 235313980789703775}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &1603506416 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 8898078350816034229, guid: bfb5e1cd0fa48f14ab95d4bf92e34f4d, type: 3}
-  m_PrefabInstance: {fileID: 235313980789703775}
-  m_PrefabAsset: {fileID: 0}
---- !u!50 &1603506418 stripped
-Rigidbody2D:
-  m_CorrespondingSourceObject: {fileID: 5391667095383369321, guid: bfb5e1cd0fa48f14ab95d4bf92e34f4d, type: 3}
-  m_PrefabInstance: {fileID: 235313980789703775}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1603506420
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2303,12 +2297,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80982bc8385715c48a280c937dbeec73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 1603506418}
-  anim: {fileID: 1603506416}
   _moveSpeed: 10
-  heart2: {fileID: 1412042317}
-  heart3: {fileID: 579413871}
-  healthBar: {fileID: 1648623200}
+  healthManager: {fileID: 0}
 --- !u!1 &1605428436
 GameObject:
   m_ObjectHideFlags: 0
@@ -2707,6 +2697,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1648623201}
+  - component: {fileID: 1648623202}
   m_Layer: 5
   m_Name: HealthBar
   m_TagString: Untagged
@@ -2734,6 +2725,21 @@ RectTransform:
   m_AnchoredPosition: {x: -225, y: 0}
   m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0, y: 1}
+--- !u!114 &1648623202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1648623200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52e2cf531c2997c4cb1a0e64248c44fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heart2: {fileID: 1412042317}
+  heart3: {fileID: 579413871}
+  healthBar: {fileID: 1648623200}
 --- !u!1 &1753019362
 GameObject:
   m_ObjectHideFlags: 0
@@ -3546,6 +3552,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cucumber
       objectReference: {fileID: 0}
+    - target: {fileID: 8218423657429880548, guid: bfb5e1cd0fa48f14ab95d4bf92e34f4d, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3728,6 +3738,10 @@ PrefabInstance:
       propertyPath: healthBar
       value: 
       objectReference: {fileID: 1648623200}
+    - target: {fileID: 2173102032147505349, guid: a22f7621db1de3946888653dc2eab85d, type: 3}
+      propertyPath: healthManager
+      value: 
+      objectReference: {fileID: 1648623202}
     - target: {fileID: 6941558038036566054, guid: a22f7621db1de3946888653dc2eab85d, type: 3}
       propertyPath: m_LocalPosition.x
       value: -168.06628

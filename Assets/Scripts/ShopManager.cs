@@ -1,20 +1,19 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class ShopManager : MonoBehaviour
 {
     public GameObject[] characterPreview;
-    public int selectedCharacterIndex = 0; 
+    public int selectedCharacterIndex = 0;
     [SerializeField] private TMP_Text Money;
     public static ShopManager instance;
     private void Start()
     {
         CharacterSelection();
-    }
-    private void Update()
-    {
         Money.text = "Coins: " + PlayerPrefs.GetInt("UserCoins", 0);
     }
+
     private void CharacterSelection()
     {
         selectedCharacterIndex = PlayerPrefs.GetInt("SelecterCharacter", 0);
@@ -36,7 +35,7 @@ public class ShopManager : MonoBehaviour
         PlayerPrefs.SetInt("SelecterCharacter", selectedCharacterIndex);
         PlayerPrefs.Save();
     }
-     public void PreviousButton()
+    public void PreviousButton()
     {
         characterPreview[selectedCharacterIndex].SetActive(false);
         selectedCharacterIndex--;
@@ -47,6 +46,10 @@ public class ShopManager : MonoBehaviour
         characterPreview[selectedCharacterIndex].SetActive(true);
         PlayerPrefs.SetInt("SelecterCharacter", selectedCharacterIndex);
         PlayerPrefs.Save();
+    }
+    public void PlayButton()
+    {
+        SceneManager.LoadScene(1);
     }
 }
 
