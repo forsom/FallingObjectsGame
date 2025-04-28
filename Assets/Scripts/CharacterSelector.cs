@@ -10,7 +10,7 @@ public class CharacterSelector : MonoBehaviour
     }
     private void SelectedCharacter()
     {
-        selectedCharacterIndex = PlayerPrefs.GetInt("SelecterCharacter",1);
+        selectedCharacterIndex = PlayerPrefs.GetInt("SelecterCharacter",0);
         foreach (GameObject character in characterList)
         {
             character.SetActive(false);

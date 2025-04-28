@@ -8,6 +8,7 @@ TagManager:
   - Coin
   - Heart
   - Bomb
+  - Health
   layers:
   - Default
   - TransparentFX

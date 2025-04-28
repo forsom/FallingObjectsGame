@@ -7,24 +7,16 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     public event Action PlayerDied;
-    public static PlayerMovement instance;
 
     [SerializeField] private float _moveSpeed = 10f;
-    [SerializeField] private HealthManager healthManager;
-    // [SerializeField] private GameObject heart2;
-    // [SerializeField] private GameObject heart3;
-    // [SerializeField] private GameObject healthBar;
 
     private Rigidbody2D rb;
     private Animator anim;
     private float _horizontalMovement;
-    // private int _maxHealth = 3;
-
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        instance = this;
     }
     private void FixedUpdate()
     {
@@ -37,28 +29,26 @@ public class PlayerMovement : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Bomb"))
         {
-            // _maxHealth--;
-            int currentHealth = healthManager.GetHealth();
-            currentHealth--;
-            healthManager.SetHealth(currentHealth);
-            SoundManager.PlaySound(SoundType.HIT);
-            anim.SetTrigger("damage");
-            // HeartsUpdate();
-            // if (_maxHealth == 0)
-            if (currentHealth == 0)
+            if (HealthManager.instance != null)
             {
-                anim.ResetTrigger("damage");
-                PlayerDied.Invoke();
-                Destroy(this.gameObject);
+                int currentHealth = HealthManager.instance.GetHealth();
+                currentHealth--;
+                HealthManager.instance.SetHealth(currentHealth);
+                SoundManager.PlaySound(SoundType.HIT);
+                anim.SetTrigger("damage");
+                if (currentHealth == 0)
+                {
+                    anim.ResetTrigger("damage");
+                    PlayerDied?.Invoke();
+                    Destroy(this.gameObject);
+                }
             }
-            
         }
         if (collision.gameObject.CompareTag("Heart"))
         {
-            // HealthManager.HeartsUpdate();
-            int currentHealth = healthManager.GetHealth();
+            int currentHealth = HealthManager.instance.GetHealth();
             currentHealth++;
-            healthManager.SetHealth(currentHealth);
+            HealthManager.instance.SetHealth(currentHealth);
         }
     }
 
@@ -67,15 +57,6 @@ public class PlayerMovement : MonoBehaviour
     {
         _horizontalMovement = context.ReadValue<Vector2>().x;
     }
-    // public void SetHealth(int newHealth)
-    // {
-    //     _maxHealth = Mathf.Clamp(newHealth, 0, 3);
-    //     HeartsUpdate();
-    // }
-    // public int GetHealth()
-    // {
-    //     return _maxHealth;
-    // }
 
     private void UpdateSpriteDirection()
     {
@@ -91,11 +72,6 @@ public class PlayerMovement : MonoBehaviour
         }
         // Якщо _horizontalMovement == 0, залишаємо поточний напрямок
     }
-    // private void HeartsUpdate()
-    // {
-    //     heart2.SetActive(_maxHealth >= 2);
-    //     heart3.SetActive(_maxHealth >= 3);
-    //     healthBar.SetActive(_maxHealth > 0);
-    // }
+
 }
 
