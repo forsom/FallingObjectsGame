@@ -2924,7 +2924,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a05a266234ec1124ca78aef32cea30df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerMovement: {fileID: 2097547337}
   GameOverCanvas: {fileID: 1605428440}
   ScrImg: {fileID: 1308299311}
   CoinsCount: {fileID: 1615091056}
@@ -3182,6 +3181,7 @@ MonoBehaviour:
   - {fileID: 711876829}
   - {fileID: 1603506414}
   selectedCharacterIndex: 0
+  gameController: {fileID: 0}
 --- !u!1 &1881497302
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
-    [SerializeField] PlayerMovement playerMovement;
+    // [SerializeField] PlayerMovement playerMovement;
     [SerializeField] private Canvas GameOverCanvas;
     [SerializeField] private Image ScrImg;
     [SerializeField] private Image CoinsCount;
@@ -19,13 +19,15 @@ public class GameController : MonoBehaviour
 
     [SerializeField] private Sprite onButton;
     [SerializeField] private Sprite offButton;
+    private PlayerMovement playerMovement;
     private float _bestScore;
     private float _currentScore;
     private const string BestScoreKey = "UserBestScore";
 
     void Awake()
     {
-        playerMovement.PlayerDied += ActivateGameOverScreen; // підписка на подію
+        FindAndSetupPlayer();
+        // playerMovement.PlayerDied += ActivateGameOverScreen; // підписка на подію
         UpdateButtonSprite(musicButton, MusicManager._instance._isMusicEnabled);
         UpdateButtonSprite(soundButton, SoundManager.isSoundEnable);
     }
@@ -106,7 +108,7 @@ public class GameController : MonoBehaviour
         if (_currentScore > _bestScore)
         {
             _bestScore = _currentScore;
-            PlayerPrefs.SetFloat(BestScoreKey,_currentScore);
+            PlayerPrefs.SetFloat(BestScoreKey, _currentScore);
             PlayerPrefs.Save();
         }
 
@@ -121,6 +123,31 @@ public class GameController : MonoBehaviour
         else // Якщо музика вимкнена
         {
             buttonImage.sprite = offButton; // Встановлюємо спрайт "вимкнено"
+        }
+    }
+    public void UpdatePlayerReference(PlayerMovement newPlayerMovement)
+    {
+        if (playerMovement != null)
+        {
+            playerMovement.PlayerDied -= ActivateGameOverScreen;
+        }
+        playerMovement = newPlayerMovement;
+        if (playerMovement != null)
+        {
+            playerMovement.PlayerDied += ActivateGameOverScreen;
+        }
+    }
+    private void FindAndSetupPlayer()
+    {
+        // Знаходимо активного гравця за тегом
+        GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+        if (playerObject != null)
+        {
+            playerMovement = playerObject.GetComponent<PlayerMovement>();
+            if (playerMovement != null)
+            {
+                playerMovement.PlayerDied += ActivateGameOverScreen;
+            }
         }
     }
 }

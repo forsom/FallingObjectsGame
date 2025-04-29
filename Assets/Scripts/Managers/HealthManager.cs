@@ -7,10 +7,16 @@ public class HealthManager : MonoBehaviour
     [SerializeField] private GameObject heart3;
     [SerializeField] private GameObject healthBar;
     private int _maxHealth = 3;
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+    }
     private void Start()
     {
         HeartsUpdate();
-        instance = this;
     }
     private void HeartsUpdate()
     {
