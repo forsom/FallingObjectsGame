@@ -1,12 +1,10 @@
-using System.ComponentModel;
-using System.Data;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class CharacterSelector : MonoBehaviour
 {
     public GameObject[] characterList;
     public int selectedCharacterIndex;
+    public InputHandler inputHandler;
     [SerializeField] private GameController gameController;
     private void Start()
     {
@@ -19,12 +17,14 @@ public class CharacterSelector : MonoBehaviour
         {
             character.SetActive(false);
         }
+
         GameObject activeCharacter = characterList[selectedCharacterIndex];
         activeCharacter.SetActive(true);
-        if (gameController != null)
+        if (gameController != null && inputHandler != null)
         {
             PlayerMovement newPlayerMovement = activeCharacter.GetComponent<PlayerMovement>();
             gameController.UpdatePlayerReference(newPlayerMovement);
+            inputHandler.SetActivePlayer(newPlayerMovement);
         }
     }
 }
