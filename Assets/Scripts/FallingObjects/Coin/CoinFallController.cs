@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class CoinFallController : MonoBehaviour
 {
-    [SerializeField] private PlayerMovement playerMovement;
+    [SerializeField] private CharacterSelector characterSelector;
     [SerializeField] private float _minX = -20f;
     [SerializeField] private float _maxX = 20f;
     [SerializeField] private float _minWait = 5f;
@@ -25,10 +25,10 @@ public class CoinFallController : MonoBehaviour
     }
     private System.Collections.IEnumerator CoinSpawner()
     {
-        if (playerMovement != null && coinObject != null)
+        if (characterSelector.GetActivePlayerMovement() != null && coinObject != null)
         {
             yield return new WaitForSeconds(initialDelay);
-            playerMovement.PlayerDied += StopCoinsFall;
+            characterSelector.GetActivePlayerMovement().PlayerDied += StopCoinsFall;
             while (_isSpawning)
             {
                 RandomDirectionSpawn();
@@ -38,10 +38,10 @@ public class CoinFallController : MonoBehaviour
     }
     private void StopCoinsFall()
     {
-        if (playerMovement != null)
+        if (characterSelector.GetActivePlayerMovement() != null)
         {
             _isSpawning = false;
-            playerMovement.PlayerDied -= StopCoinsFall;
+            characterSelector.GetActivePlayerMovement().PlayerDied -= StopCoinsFall;
             HideCoins();
         }
     }

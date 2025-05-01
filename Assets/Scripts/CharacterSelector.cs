@@ -6,11 +6,14 @@ public class CharacterSelector : MonoBehaviour
     public int selectedCharacterIndex;
     public InputHandler inputHandler;
     [SerializeField] private GameController gameController;
-    private void Start()
+    [SerializeField] private BombFallController bombFallController;
+    private GameObject _activeCharacter;
+    private PlayerMovement _activePlayerMovement;
+    private void Awake()
     {
         SelectedCharacter();
     }
-    private void SelectedCharacter()
+    public void SelectedCharacter()
     {
         selectedCharacterIndex = PlayerPrefs.GetInt("SelecterCharacter", 0);
         foreach (GameObject character in characterList)
@@ -18,13 +21,18 @@ public class CharacterSelector : MonoBehaviour
             character.SetActive(false);
         }
 
-        GameObject activeCharacter = characterList[selectedCharacterIndex];
-        activeCharacter.SetActive(true);
-        if (gameController != null && inputHandler != null)
+        _activeCharacter = characterList[selectedCharacterIndex];
+        _activeCharacter.SetActive(true);
+        _activePlayerMovement = _activeCharacter.GetComponent<PlayerMovement>();
+        if (gameController != null && inputHandler != null && bombFallController != null)
         {
-            PlayerMovement newPlayerMovement = activeCharacter.GetComponent<PlayerMovement>();
-            gameController.UpdatePlayerReference(newPlayerMovement);
-            inputHandler.SetActivePlayer(newPlayerMovement);
+
+            gameController.UpdatePlayerReference(_activePlayerMovement);
+            inputHandler.SetActivePlayer(_activePlayerMovement);
         }
+    }
+    public PlayerMovement GetActivePlayerMovement()
+    {
+        return _activePlayerMovement;
     }
 }

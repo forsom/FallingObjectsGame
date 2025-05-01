@@ -44,12 +44,6 @@ public class PlayerMovement : MonoBehaviour
                 }
             }
         }
-        if (collision.gameObject.CompareTag("Heart"))
-        {
-            int currentHealth = HealthManager.instance.GetHealth();
-            currentHealth++;
-            HealthManager.instance.SetHealth(currentHealth);
-        }
     }
 
 

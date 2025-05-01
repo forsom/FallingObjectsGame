@@ -3,13 +3,12 @@ using UnityEngine;
 
 public class BombFallController : MonoBehaviour
 {
-    [SerializeField] private PlayerMovement playerMovement;
+    [SerializeField] private CharacterSelector characterSelector;
     [SerializeField] private float _minX = -20f;
     [SerializeField] private float _maxX = 20f;
     [SerializeField] private float _minWait = 10f;
     [SerializeField] private float _maxWait = 25f;
     [SerializeField] private float initialDelay = 15f;
-    private float _timeSinceGameStart;
     public GameObject heartObject;
     private List<GameObject> _spawnedHeartsList = new List<GameObject>();
     private bool _isSpawning = true;
@@ -25,10 +24,10 @@ public class BombFallController : MonoBehaviour
     }
     private System.Collections.IEnumerator HeartsSpawner()
     {
-        if (playerMovement != null && heartObject != null)
+        if (characterSelector.GetActivePlayerMovement() != null && heartObject != null)
         {
             yield return new WaitForSeconds(initialDelay);
-            playerMovement.PlayerDied += StopHeartsFall;
+            characterSelector.GetActivePlayerMovement().PlayerDied += StopHeartsFall;
             while (_isSpawning)
             {
                 RandomDirectionSpawn();
@@ -38,10 +37,10 @@ public class BombFallController : MonoBehaviour
     }
     private void StopHeartsFall()
     {
-        if (playerMovement != null)
+        if (characterSelector.GetActivePlayerMovement() != null)
         {
             _isSpawning = false;
-            playerMovement.PlayerDied -= StopHeartsFall;
+            characterSelector.GetActivePlayerMovement().PlayerDied -= StopHeartsFall;
             HideHearts();
         }
     }

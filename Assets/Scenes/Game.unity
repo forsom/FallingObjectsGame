@@ -1200,7 +1200,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 445f2b64b95ef984cae6f32caf70bdb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerMovement: {fileID: 2097547337}
+  characterSelector: {fileID: 1851860532}
   _minX: -20
   _maxX: 20
   _wait: 0.8
@@ -1240,7 +1240,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48a4a3c964a689742a80c491f6a118e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerMovement: {fileID: 2097547337}
+  characterSelector: {fileID: 1851860532}
   _minX: -20
   _maxX: 20
   _minWait: 5
@@ -1259,7 +1259,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f25c1c9530c0aad4d87c5f76224773d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerMovement: {fileID: 2097547337}
+  characterSelector: {fileID: 1851860532}
   _minX: -20
   _maxX: 20
   _minWait: 1
@@ -3225,6 +3225,7 @@ MonoBehaviour:
   selectedCharacterIndex: 0
   inputHandler: {fileID: 392311711}
   gameController: {fileID: 1803425945}
+  bombFallController: {fileID: 519420036}
 --- !u!1 &1881497302
 GameObject:
   m_ObjectHideFlags: 0
@@ -3548,17 +3549,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6941558038036566054, guid: a22f7621db1de3946888653dc2eab85d, type: 3}
   m_PrefabInstance: {fileID: 9186748345620510275}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2097547337 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2173102032147505349, guid: a22f7621db1de3946888653dc2eab85d, type: 3}
-  m_PrefabInstance: {fileID: 9186748345620510275}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2097547334}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80982bc8385715c48a280c937dbeec73, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &235313980789703775
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class BobmFallControler : MonoBehaviour
 {
-    [SerializeField] private PlayerMovement playerMovement;
+    [SerializeField] private CharacterSelector characterSelector;
     [SerializeField] private float _minX = -20f;
     [SerializeField] private float _maxX = 20f;
     [SerializeField] private float _wait = 0.8f;
@@ -14,10 +14,10 @@ public class BobmFallControler : MonoBehaviour
     private float _timeSinceLastIncreasedDiffuculty;
     private bool _isSpawning = true;
 
-
     private void Start()
     {
         StartCoroutine(BombSpawner());
+        
     }
     void Update()
     {
@@ -31,9 +31,9 @@ public class BobmFallControler : MonoBehaviour
     }
     private System.Collections.IEnumerator BombSpawner()
     {
-        if (playerMovement != null && bombObject != null)
+        if (characterSelector.GetActivePlayerMovement() != null && bombObject != null)
         {
-            playerMovement.PlayerDied += StopBombsFall;
+            characterSelector.GetActivePlayerMovement().PlayerDied += StopBombsFall;
             while (_isSpawning)
             {
                 RandomDirectionSpawn();
@@ -43,10 +43,10 @@ public class BobmFallControler : MonoBehaviour
     }
     private void StopBombsFall()
     {
-        if (playerMovement != null)
+        if (characterSelector.GetActivePlayerMovement() != null)
         {
             _isSpawning = false;
-            playerMovement.PlayerDied -= StopBombsFall;
+            characterSelector.GetActivePlayerMovement().PlayerDied -= StopBombsFall;
             HideBombs();
         }
     }

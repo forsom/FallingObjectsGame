@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
-    // [SerializeField] PlayerMovement playerMovement;
     [SerializeField] private Canvas GameOverCanvas;
     [SerializeField] private Image ScrImg;
     [SerializeField] private Image CoinsCount;
@@ -27,7 +26,6 @@ public class GameController : MonoBehaviour
     void Awake()
     {
         FindAndSetupPlayer();
-        // playerMovement.PlayerDied += ActivateGameOverScreen; // підписка на подію
         UpdateButtonSprite(musicButton, MusicManager._instance._isMusicEnabled);
         UpdateButtonSprite(soundButton, SoundManager.isSoundEnable);
     }
