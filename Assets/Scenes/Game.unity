@@ -1243,9 +1243,9 @@ MonoBehaviour:
   characterSelector: {fileID: 1851860532}
   _minX: -20
   _maxX: 20
-  _minWait: 5
-  _maxWait: 10
-  initialDelay: 10
+  _minWait: 1
+  _maxWait: 2
+  initialDelay: 1
   coinObject: {fileID: 1071689768524494611, guid: 7e1f556d3b652a64f932524a9843b8bc, type: 3}
 --- !u!114 &519420036
 MonoBehaviour:
