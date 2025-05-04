@@ -2,7 +2,6 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using UnityEngine.PlayerLoop;
 
 public class ShopManager : MonoBehaviour
 {
@@ -27,7 +26,7 @@ public class ShopManager : MonoBehaviour
 
     private void CharacterSelection()
     {
-        selectedCharacterIndex = PlayerPrefs.GetInt("SelecterCharacter", 0);
+        selectedCharacterIndex = PlayerPrefs.GetInt("SelectedCharacter", 0);
         foreach (GameObject character in characterPreview)
         {
             character.SetActive(false);
@@ -62,7 +61,7 @@ public class ShopManager : MonoBehaviour
         {
             return;
         }
-        PlayerPrefs.SetInt("SelecterCharacter", selectedCharacterIndex);
+        PlayerPrefs.SetInt("SelectedCharacter", selectedCharacterIndex);
         PlayerPrefs.Save();
     }
     public void PreviousButton()
@@ -79,7 +78,7 @@ public class ShopManager : MonoBehaviour
         {
             return;
         }
-        PlayerPrefs.SetInt("SelecterCharacter", selectedCharacterIndex);
+        PlayerPrefs.SetInt("SelectedCharacter", selectedCharacterIndex);
         PlayerPrefs.Save();
     }
     public void BuyCharacter()
@@ -91,6 +90,7 @@ public class ShopManager : MonoBehaviour
         CharacterSelection();
         PlayerPrefs.SetInt("UserCoins", PlayerPrefs.GetInt("UserCoins", 0) - characterAvailable.price);
         PlayerPrefs.Save();
+        Debug.Log(selectedCharacterIndex);
     }
     public void PlayButton()
     {
