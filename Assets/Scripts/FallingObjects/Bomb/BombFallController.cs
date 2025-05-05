@@ -9,7 +9,7 @@ public class BobmFallControler : MonoBehaviour
     [SerializeField] private float _wait = 0.8f;
     [SerializeField] private float _waitDecrease = 0.05f;
     [SerializeField] private float _increaseDifficultyInterval = 5f;
-    public GameObject bombObject;
+    [SerializeField] private GameObject _bombObject;
     private List<GameObject> _spawnedBombsList = new List<GameObject>();
     private float _timeSinceLastIncreasedDiffuculty;
     private bool _isSpawning = true;
@@ -26,12 +26,12 @@ public class BobmFallControler : MonoBehaviour
 
     public void RandomDirectionSpawn()
     {
-        GameObject newobject = Instantiate(bombObject, new Vector3(Random.Range(_minX, _maxX), 15, 0), Quaternion.identity);
+        GameObject newobject = Instantiate(_bombObject, new Vector3(Random.Range(_minX, _maxX), 15, 0), Quaternion.identity);
         _spawnedBombsList.Add(newobject);
     }
     private System.Collections.IEnumerator BombSpawner()
     {
-        if (characterSelector.GetActivePlayerMovement() != null && bombObject != null)
+        if (characterSelector.GetActivePlayerMovement() != null && _bombObject != null)
         {
             characterSelector.GetActivePlayerMovement().PlayerDied += StopBombsFall;
             while (_isSpawning)

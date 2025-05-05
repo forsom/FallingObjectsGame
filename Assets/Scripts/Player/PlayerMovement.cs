@@ -45,13 +45,6 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
-
-
-    public void Move(InputAction.CallbackContext context)
-    {
-        _horizontalMovement = context.ReadValue<Vector2>().x;
-    }
-
     private void UpdateSpriteDirection()
     {
         // Якщо рухаємося вправо (_horizontalMovement > 0)
@@ -65,6 +58,10 @@ public class PlayerMovement : MonoBehaviour
             transform.localScale = new Vector3(-1f, 1f, 1f); // Дзеркальний масштаб по X
         }
         // Якщо _horizontalMovement == 0, залишаємо поточний напрямок
+    }
+    public void Move(InputAction.CallbackContext context)
+    {
+        _horizontalMovement = context.ReadValue<Vector2>().x;
     }
 
 }

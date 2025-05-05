@@ -8,7 +8,7 @@ public class InputHandler : MonoBehaviour
 
     private void Awake()
     {
-        DontDestroyOnLoad(gameObject); // Зберігаємо між сценами
+        DontDestroyOnLoad(gameObject);
     }
 
     public void SetActivePlayer(PlayerMovement playerMovement)

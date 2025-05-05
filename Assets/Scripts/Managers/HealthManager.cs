@@ -3,9 +3,9 @@ using UnityEngine;
 public class HealthManager : MonoBehaviour
 {
     public static HealthManager instance;
-    [SerializeField] private GameObject heart2;
-    [SerializeField] private GameObject heart3;
-    [SerializeField] private GameObject healthBar;
+    [SerializeField] private GameObject _heart2;
+    [SerializeField] private GameObject _heart3;
+    [SerializeField] private GameObject _healthBar;
     private int _maxHealth = 3;
     private void Awake()
     {
@@ -18,12 +18,6 @@ public class HealthManager : MonoBehaviour
     {
         HeartsUpdate();
     }
-    private void HeartsUpdate()
-    {
-        heart2.SetActive(_maxHealth >= 2);
-        heart3.SetActive(_maxHealth >= 3);
-        healthBar.SetActive(_maxHealth > 0);
-    }
     public void SetHealth(int newHealth)
     {
         _maxHealth = Mathf.Clamp(newHealth, 0, 3);
@@ -32,5 +26,11 @@ public class HealthManager : MonoBehaviour
     public int GetHealth()
     {
         return _maxHealth;
+    }
+    private void HeartsUpdate()
+    {
+        _heart2.SetActive(_maxHealth >= 2);
+        _heart3.SetActive(_maxHealth >= 3);
+        _healthBar.SetActive(_maxHealth > 0);
     }
 }

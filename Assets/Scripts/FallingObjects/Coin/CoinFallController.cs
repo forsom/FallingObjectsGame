@@ -9,8 +9,7 @@ public class CoinFallController : MonoBehaviour
     [SerializeField] private float _minWait = 5f;
     [SerializeField] private float _maxWait = 10f;
     [SerializeField] private float initialDelay = 10f;
-    private float _timeSinceGameStart;
-    public GameObject coinObject;
+    [SerializeField] private GameObject _coinObject;
     private List<GameObject> _spawnedCoinsList = new List<GameObject>();
     private bool _isSpawning = true;
     private void Start()
@@ -20,12 +19,12 @@ public class CoinFallController : MonoBehaviour
 
     public void RandomDirectionSpawn()
     {
-        GameObject newobject = Instantiate(coinObject, new Vector3(Random.Range(_minX, _maxX), 15, 0), Quaternion.identity);
+        GameObject newobject = Instantiate(_coinObject, new Vector3(Random.Range(_minX, _maxX), 15, 0), Quaternion.identity);
         _spawnedCoinsList.Add(newobject);
     }
     private System.Collections.IEnumerator CoinSpawner()
     {
-        if (characterSelector.GetActivePlayerMovement() != null && coinObject != null)
+        if (characterSelector.GetActivePlayerMovement() != null && _coinObject != null)
         {
             yield return new WaitForSeconds(initialDelay);
             characterSelector.GetActivePlayerMovement().PlayerDied += StopCoinsFall;

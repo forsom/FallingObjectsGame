@@ -18,14 +18,13 @@ public class SoundManager : MonoBehaviour
     private static SoundManager instance;
     private const string SoundEnabledKey = "SoundEnabled";
     private AudioSource _audioSource;
-    private bool _isSoundCurrentlyEnabled;
-    void Awake()
+    private void Awake()
     {
         instance = this;
         DontDestroyOnLoad(transform.root.gameObject);
         GetSoundSettings();
     }
-    void Start()
+    private void Start()
     {
         _audioSource = GetComponent<AudioSource>();
     }

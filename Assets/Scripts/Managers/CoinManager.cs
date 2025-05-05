@@ -2,10 +2,9 @@ using UnityEngine;
 
 public class CoinManager : MonoBehaviour
 {
-
+    public int coinsCount;
     public static CoinManager instance;
     private const string CoinsAmount = "UserCoins";
-    public int coinsCount;
     void Awake()
     {
         if (instance == null)
@@ -23,7 +22,6 @@ public class CoinManager : MonoBehaviour
     {
         coinsCount++;
         CoinsSave();
-        Debug.Log(coinsCount);
     }
     private void CoinsSave()
     {

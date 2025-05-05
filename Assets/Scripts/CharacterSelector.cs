@@ -1,12 +1,13 @@
+using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 
 public class CharacterSelector : MonoBehaviour
 {
-    public GameObject[] characterList;
-    public int selectedCharacterIndex;
-    public InputHandler inputHandler;
+    [SerializeField] InputHandler inputHandler;
+    [SerializeField] GameObject[] characterList;
     [SerializeField] private GameController gameController;
     [SerializeField] private BombFallController bombFallController;
+    private int _selectedCharacterIndex;
     private GameObject _activeCharacter;
     private PlayerMovement _activePlayerMovement;
     private void Awake()
@@ -15,13 +16,13 @@ public class CharacterSelector : MonoBehaviour
     }
     public void SelectedCharacter()
     {
-        selectedCharacterIndex = PlayerPrefs.GetInt("SelectedCharacter", 0);
+        _selectedCharacterIndex = PlayerPrefs.GetInt("SelectedCharacter", 0);
         foreach (GameObject character in characterList)
         {
             character.SetActive(false);
         }
 
-        _activeCharacter = characterList[selectedCharacterIndex];
+        _activeCharacter = characterList[_selectedCharacterIndex];
         _activeCharacter.SetActive(true);
         _activePlayerMovement = _activeCharacter.GetComponent<PlayerMovement>();
         if (gameController != null && inputHandler != null && bombFallController != null)

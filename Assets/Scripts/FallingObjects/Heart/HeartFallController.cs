@@ -8,8 +8,8 @@ public class BombFallController : MonoBehaviour
     [SerializeField] private float _maxX = 20f;
     [SerializeField] private float _minWait = 10f;
     [SerializeField] private float _maxWait = 25f;
-    [SerializeField] private float initialDelay = 15f;
-    public GameObject heartObject;
+    [SerializeField] private float _initialDelay = 15f;
+    [SerializeField] private GameObject _heartObject;
     private List<GameObject> _spawnedHeartsList = new List<GameObject>();
     private bool _isSpawning = true;
     private void Start()
@@ -19,14 +19,14 @@ public class BombFallController : MonoBehaviour
 
     public void RandomDirectionSpawn()
     {
-        GameObject newobject = Instantiate(heartObject, new Vector3(Random.Range(_minX, _maxX), 15, 0), Quaternion.identity);
+        GameObject newobject = Instantiate(_heartObject, new Vector3(Random.Range(_minX, _maxX), 15, 0), Quaternion.identity);
         _spawnedHeartsList.Add(newobject);
     }
     private System.Collections.IEnumerator HeartsSpawner()
     {
-        if (characterSelector.GetActivePlayerMovement() != null && heartObject != null)
+        if (characterSelector.GetActivePlayerMovement() != null && _heartObject != null)
         {
-            yield return new WaitForSeconds(initialDelay);
+            yield return new WaitForSeconds(_initialDelay);
             characterSelector.GetActivePlayerMovement().PlayerDied += StopHeartsFall;
             while (_isSpawning)
             {

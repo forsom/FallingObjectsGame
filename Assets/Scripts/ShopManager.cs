@@ -8,9 +8,11 @@ public class ShopManager : MonoBehaviour
     public GameObject[] characterPreview;
     public int selectedCharacterIndex = 0;
     public CharacterBluepring[] characters;
-    [SerializeField] private TMP_Text money;
-    [SerializeField] private Button buyButton;
-    [SerializeField] private TMP_Text buyPrice;
+    [SerializeField] private TMP_Text _money;
+    [SerializeField] private Button _buyButton;
+    [SerializeField] private TMP_Text _buyPrice;
+    [SerializeField] private GameObject _mainMenu;
+    [SerializeField] private GameObject _characterShop;
 
     public static ShopManager instance;
     private void Start()
@@ -21,7 +23,7 @@ public class ShopManager : MonoBehaviour
     private void Update()
     {
         UpdateBuyButtonUI();
-        money.text = "Coins: " + PlayerPrefs.GetInt("UserCoins", 0);
+        _money.text = "Coins: " + PlayerPrefs.GetInt("UserCoins", 0);
     }
 
     private void CharacterSelection()
@@ -96,24 +98,29 @@ public class ShopManager : MonoBehaviour
     {
         SceneManager.LoadScene(1);
     }
+    public void BackButton()
+    {
+        _characterShop.SetActive(false);
+        _mainMenu.SetActive(true);
+    }
     private void UpdateBuyButtonUI()
     {
         CharacterBluepring characterAvailable = characters[selectedCharacterIndex];
         if (characterAvailable.isUnlocked)
         {
-            buyButton.gameObject.SetActive(false);
+            _buyButton.gameObject.SetActive(false);
         }
         else
         {
-            buyButton.gameObject.SetActive(true);
-            buyPrice.text = "Buy " + characterAvailable.price;
+            _buyButton.gameObject.SetActive(true);
+            _buyPrice.text = "Buy " + characterAvailable.price;
             if (characterAvailable.price <= PlayerPrefs.GetInt("UserCoins", 0))
             {
-                buyButton.interactable = true;
+                _buyButton.interactable = true;
             }
             else
             {
-                buyButton.interactable = false;
+                _buyButton.interactable = false;
             }
         }
     }

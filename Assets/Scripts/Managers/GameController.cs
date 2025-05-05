@@ -23,18 +23,18 @@ public class GameController : MonoBehaviour
     private float _currentScore;
     private const string BestScoreKey = "UserBestScore";
 
-    void Awake()
+    private void Awake()
     {
         FindAndSetupPlayer();
         UpdateButtonSprite(musicButton, MusicManager._instance._isMusicEnabled);
         UpdateButtonSprite(soundButton, SoundManager.isSoundEnable);
     }
-    void Update()
+    private void Update()
     {
         PauseMenu();
         ScoreAndCoins();
     }
-    void ActivateGameOverScreen()
+    private void ActivateGameOverScreen()
     {
         BestScore();
         SoundManager.PlaySound(SoundType.GAMEOVER);
@@ -45,7 +45,7 @@ public class GameController : MonoBehaviour
         BestScrTxt.text = "Best score: " + Mathf.Round(_bestScore);
         playerMovement.PlayerDied -= ActivateGameOverScreen;
     }
-    void PauseMenu()
+    private void PauseMenu()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -99,6 +99,18 @@ public class GameController : MonoBehaviour
             CoinsTxt.text = ": " + CoinManager.instance.coinsCount;
         }
     }
+    public void UpdatePlayerReference(PlayerMovement newPlayerMovement)
+    {
+        if (playerMovement != null)
+        {
+            playerMovement.PlayerDied -= ActivateGameOverScreen;
+        }
+        playerMovement = newPlayerMovement;
+        if (playerMovement != null)
+        {
+            playerMovement.PlayerDied += ActivateGameOverScreen;
+        }
+    }
     private void BestScore()
     {
         _currentScore = Mathf.Round(Time.timeSinceLevelLoad);
@@ -121,18 +133,6 @@ public class GameController : MonoBehaviour
         else // Якщо музика вимкнена
         {
             buttonImage.sprite = offButton; // Встановлюємо спрайт "вимкнено"
-        }
-    }
-    public void UpdatePlayerReference(PlayerMovement newPlayerMovement)
-    {
-        if (playerMovement != null)
-        {
-            playerMovement.PlayerDied -= ActivateGameOverScreen;
-        }
-        playerMovement = newPlayerMovement;
-        if (playerMovement != null)
-        {
-            playerMovement.PlayerDied += ActivateGameOverScreen;
         }
     }
     private void FindAndSetupPlayer()
