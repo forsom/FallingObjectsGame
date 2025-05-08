@@ -1698,6 +1698,9 @@ MonoBehaviour:
   - {fileID: 2001234272}
   - {fileID: 153530805}
   - {fileID: 1954741900}
+  - {fileID: 2001234272}
+  - {fileID: 1503308066}
+  - {fileID: 153530805}
   selectedCharacterIndex: 0
   characters:
   - name: Pirate
@@ -1729,6 +1732,18 @@ MonoBehaviour:
     index: 5
     price: 200
     speed: 20
+    isUnlocked: 0
+  - name: PinkStar
+    index: 3
+    price: 0
+    isUnlocked: 0
+  - name: BabyShark
+    index: 4
+    price: 0
+    isUnlocked: 0
+  - name: Crabby
+    index: 5
+    price: 0
     isUnlocked: 0
   _money: {fileID: 1237422615}
   _buyButton: {fileID: 2003265075}
