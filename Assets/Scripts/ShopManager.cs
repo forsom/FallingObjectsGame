@@ -13,8 +13,9 @@ public class ShopManager : MonoBehaviour
     [SerializeField] private TMP_Text _buyPrice;
     [SerializeField] private GameObject _mainMenu;
     [SerializeField] private GameObject _characterShop;
+    [SerializeField] private TMP_Text _characterName;
+    [SerializeField] private TMP_Text _characterSpeed;
 
-    public static ShopManager instance;
     private void Start()
     {
         IsCharacterLocked();
@@ -24,16 +25,6 @@ public class ShopManager : MonoBehaviour
     {
         UpdateBuyButtonUI();
         _money.text = "Coins: " + PlayerPrefs.GetInt("UserCoins", 0);
-    }
-
-    private void CharacterSelection()
-    {
-        selectedCharacterIndex = PlayerPrefs.GetInt("SelectedCharacter", 0);
-        foreach (GameObject character in characterPreview)
-        {
-            character.SetActive(false);
-        }
-        characterPreview[selectedCharacterIndex].SetActive(true);
     }
     public void IsCharacterLocked()
     {
@@ -59,6 +50,7 @@ public class ShopManager : MonoBehaviour
         }
         characterPreview[selectedCharacterIndex].SetActive(true);
         CharacterBluepring characterAvailable = characters[selectedCharacterIndex];
+        CharacterSelection();
         if (!characterAvailable.isUnlocked)
         {
             return;
@@ -76,6 +68,7 @@ public class ShopManager : MonoBehaviour
         }
         characterPreview[selectedCharacterIndex].SetActive(true);
         CharacterBluepring characterAvailable = characters[selectedCharacterIndex];
+        CharacterSelection();
         if (!characterAvailable.isUnlocked)
         {
             return;
@@ -103,6 +96,7 @@ public class ShopManager : MonoBehaviour
         _characterShop.SetActive(false);
         _mainMenu.SetActive(true);
     }
+
     private void UpdateBuyButtonUI()
     {
         CharacterBluepring characterAvailable = characters[selectedCharacterIndex];
@@ -123,6 +117,16 @@ public class ShopManager : MonoBehaviour
                 _buyButton.interactable = false;
             }
         }
+    }
+    private void CharacterSelection()
+    {
+        foreach (GameObject character in characterPreview)
+        {
+            character.SetActive(false);
+        }
+        characterPreview[selectedCharacterIndex].SetActive(true);
+        _characterName.text = characters[selectedCharacterIndex].name;
+        _characterSpeed.text = "Speed: " + characters[selectedCharacterIndex].speed;
     }
 }
 

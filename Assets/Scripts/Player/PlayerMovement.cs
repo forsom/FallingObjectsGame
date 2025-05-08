@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour
 {
     public event Action PlayerDied;
 
-    [SerializeField] private float _moveSpeed = 10f;
+    public int moveSpeed = 10;
 
     private Rigidbody2D rb;
     private Animator anim;
@@ -20,7 +20,7 @@ public class PlayerMovement : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        rb.velocity = new Vector2(_horizontalMovement * _moveSpeed, rb.velocity.y);
+        rb.velocity = new Vector2(_horizontalMovement * moveSpeed, rb.velocity.y);
         anim.SetFloat("xVelocity", Math.Abs(rb.velocity.x));
         UpdateSpriteDirection();
 

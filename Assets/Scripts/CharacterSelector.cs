@@ -1,3 +1,4 @@
+using System.Collections;
 using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 
@@ -30,6 +31,27 @@ public class CharacterSelector : MonoBehaviour
 
             gameController.UpdatePlayerReference(_activePlayerMovement);
             inputHandler.SetActivePlayer(_activePlayerMovement);
+        }
+        switch (_selectedCharacterIndex)
+        {
+            case 0:
+                _activePlayerMovement.moveSpeed = 10;
+                break;
+            case 1:
+                _activePlayerMovement.moveSpeed = 12;
+                break;
+            case 2:
+                _activePlayerMovement.moveSpeed = 14;
+                break;
+            case 3:
+                _activePlayerMovement.moveSpeed = 16;
+                break;
+            case 4:
+                _activePlayerMovement.moveSpeed = 18;
+                break;
+            case 5:
+                _activePlayerMovement.moveSpeed = 20;
+                break;
         }
     }
     public PlayerMovement GetActivePlayerMovement()
