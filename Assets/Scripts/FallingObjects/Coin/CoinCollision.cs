@@ -8,7 +8,11 @@ public class CoinCollision : MonoBehaviour
         {
             CoinManager.instance.AddCoin();
             SoundManager.PlaySound(SoundType.COINPICKUP);
+            Destroy(this.gameObject);
         }
-        Destroy(this.gameObject);
+        else if (collision.gameObject.CompareTag("Background"))
+        {
+            Destroy(this.gameObject);
+        }
     }
 }

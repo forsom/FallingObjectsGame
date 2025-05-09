@@ -7,9 +7,13 @@ public class HeartCollision : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             int currentHealth = HealthManager.instance.GetHealth();
-            HealthManager.instance.SetHealth(currentHealth++);
+            HealthManager.instance.SetHealth(currentHealth + 1);
             SoundManager.PlaySound(SoundType.HEARTPICKUP);
+            Destroy(this.gameObject);
         }
-        Destroy(this.gameObject);
+        else if (collision.gameObject.CompareTag("Background"))
+        {
+            Destroy(this.gameObject);
+        }
     }
 }

@@ -14,7 +14,11 @@ public class BombCollision : MonoBehaviour
         {
             _cameraAnim.SetTrigger("shake");
             SoundManager.PlaySound(SoundType.BOMBEXPLOSION);
+            Destroy(this.gameObject);
         }
-        Destroy(this.gameObject);
+        else if (collision.gameObject.CompareTag("Player"))
+        {
+            Destroy(this.gameObject);
+        }
     }
 }

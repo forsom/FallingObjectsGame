@@ -7,7 +7,7 @@ public class BobmFallControler : MonoBehaviour
     [SerializeField] private float _minX = -20f;
     [SerializeField] private float _maxX = 20f;
     [SerializeField] private float _wait = 0.8f;
-    [SerializeField] private float _waitDecrease = 0.05f;
+    [SerializeField] private float _waitDecrease = 0.01f;
     [SerializeField] private float _increaseDifficultyInterval = 5f;
     [SerializeField] private GameObject _bombObject;
     private List<GameObject> _spawnedBombsList = new List<GameObject>();
