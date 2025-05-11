@@ -1707,17 +1707,17 @@ MonoBehaviour:
     isUnlocked: 0
   - name: BabyShark
     index: 1
-    price: 20
+    price: 0
     speed: 12
     isUnlocked: 0
   - name: Captain
     index: 2
-    price: 30
+    price: 0
     speed: 14
     isUnlocked: 0
   - name: PinkStar
     index: 3
-    price: 50
+    price: 0
     speed: 16
     isUnlocked: 0
   - name: Crabby
@@ -1727,7 +1727,7 @@ MonoBehaviour:
     isUnlocked: 0
   - name: Cucumber
     index: 5
-    price: 200
+    price: 0
     speed: 20
     isUnlocked: 0
   _money: {fileID: 1237422615}
