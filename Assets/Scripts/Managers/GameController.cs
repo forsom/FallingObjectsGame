@@ -1,4 +1,5 @@
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -15,7 +16,6 @@ public class GameController : MonoBehaviour
     [SerializeField] private GameObject settingsMenu;
     [SerializeField] private Button musicButton;
     [SerializeField] private Button soundButton;
-
     [SerializeField] private Sprite onButton;
     [SerializeField] private Sprite offButton;
     private PlayerMovement playerMovement;
@@ -64,8 +64,23 @@ public class GameController : MonoBehaviour
                 Time.timeScale = 0;
             }
         }
-
-
+    }
+    public void PauseButtonClick()
+    {
+        if (settingsMenu == null)
+            {
+                return;
+            }
+            if (settingsMenu.activeSelf)
+            {
+                settingsMenu.SetActive(false);
+                Time.timeScale = 1;
+            }
+            else
+            {
+                settingsMenu.SetActive(true);
+                Time.timeScale = 0;
+            }
     }
     public void RetryClick()
     {
@@ -76,6 +91,7 @@ public class GameController : MonoBehaviour
         settingsMenu.SetActive(false);
         Time.timeScale = 1;
     }
+
     public void MenuClick()
     {
         Time.timeScale = 1;
