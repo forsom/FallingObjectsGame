@@ -5,7 +5,6 @@ using UnityEngine.InputSystem;
 public class InputHandler : MonoBehaviour
 {
     private PlayerMovement activePlayerMovement;
-
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);

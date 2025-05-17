@@ -10,20 +10,37 @@ public class PlayerMovement : MonoBehaviour
 
     public int moveSpeed = 10;
 
-    private Rigidbody2D rb;
-    private Animator anim;
+    private Rigidbody2D _rb;
+    private Animator _anim;
     private float _horizontalMovement;
     private void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animator>();
+        _rb = GetComponent<Rigidbody2D>();
+        _anim = GetComponent<Animator>();
     }
     private void FixedUpdate()
     {
-        rb.velocity = new Vector2(_horizontalMovement * moveSpeed, rb.velocity.y);
-        anim.SetFloat("xVelocity", Math.Abs(rb.velocity.x));
+        _rb.velocity = new Vector2(_horizontalMovement * moveSpeed, _rb.velocity.y);
+        _anim.SetFloat("xVelocity", Math.Abs(_rb.velocity.x));
         UpdateSpriteDirection();
 
+    }
+    public void MoveLeft()
+    {
+        _horizontalMovement = -1f;
+    }
+
+    public void MoveRight()
+    {
+        _horizontalMovement = 1f;
+    }
+    public void StopMove()
+    {
+        _horizontalMovement = 0f;
+    }
+    public void Move(InputAction.CallbackContext context)
+    {
+        _horizontalMovement = context.ReadValue<Vector2>().x;
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -35,10 +52,10 @@ public class PlayerMovement : MonoBehaviour
                 currentHealth--;
                 HealthManager.instance.SetHealth(currentHealth);
                 SoundManager.PlaySound(SoundType.HIT);
-                anim.SetTrigger("damage");
+                _anim.SetTrigger("damage");
                 if (currentHealth == 0)
                 {
-                    anim.ResetTrigger("damage");
+                    _anim.ResetTrigger("damage");
                     PlayerDied?.Invoke();
                     Destroy(this.gameObject);
                 }
@@ -59,10 +76,5 @@ public class PlayerMovement : MonoBehaviour
         }
         // Якщо _horizontalMovement == 0, залишаємо поточний напрямок
     }
-    public void Move(InputAction.CallbackContext context)
-    {
-        _horizontalMovement = context.ReadValue<Vector2>().x;
-    }
-
 }
 
