@@ -22,4 +22,27 @@ public class InputHandler : MonoBehaviour
             activePlayerMovement.Move(context);
         }
     }
+    public void OnLeftArrow()
+    {
+        if (activePlayerMovement != null)
+        {
+            activePlayerMovement.MoveLeft();
+        }
+    }
+
+    public void OnRightArrow()
+    {
+        if (activePlayerMovement != null)
+        {
+            activePlayerMovement.MoveRight();
+        }
+    }
+
+    public void OnStopMove()
+    {
+        if (activePlayerMovement != null)
+        {
+            activePlayerMovement.StopMove();
+        }
+    }
 }
